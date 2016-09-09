@@ -5,6 +5,10 @@ let mapleader=","
 nnoremap j gj
 nnoremap k gk
 
+" Leave insert mode quickly
+inoremap jk <ESC>
+inoremap kj <ESC>
+
 " Local dirs
 if !has('win32')
   set backupdir=$DOTFILES/caches/vim
@@ -36,18 +40,18 @@ colorscheme molokai
 set background=dark
 
 " Visual settings
-set cursorline " Highlight current line
+"set cursorline " Highlight current line
 set number " Enable line numbers.
 set showtabline=2 " Always show tab bar.
-set relativenumber " Use relative line numbers. Current line is still in status bar.
+"set relativenumber " Use relative line numbers. Current line is still in status bar.
 set title " Show the filename in the window titlebar.
-set nowrap " Do not wrap lines.
-set noshowmode " Don't show the current mode (airline.vim takes care of us)
+"set nowrap " Do not wrap lines.
+"set noshowmode " Don't show the current mode (airline.vim takes care of us)
 set laststatus=2 " Always show status line
 
 " Show absolute numbers in insert mode, otherwise relative line numbers.
-autocmd vimrc InsertEnter * :set norelativenumber
-autocmd vimrc InsertLeave * :set relativenumber
+"autocmd vimrc InsertEnter * :set norelativenumber
+"autocmd vimrc InsertLeave * :set relativenumber
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -114,6 +118,7 @@ set smartcase " Ignore 'ignorecase' if search pattern contains uppercase charact
 
 " Clear last search
 map <silent> <leader>/ <Esc>:nohlsearch<CR>
+map <SPACE> :noh<CR>
 
 " Ignore things
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
@@ -207,11 +212,14 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 "let g:airline#extensions#tabline#fnamecollapse = 0
 "let g:airline#extensions#tabline#fnamemod = ':t'
 
+" Python mode
+let g:pymode_lint_checkers = ['python', 'pep8']
+
 " NERDTree
 let NERDTreeShowHidden = 1
 let NERDTreeMouseMode = 2
-let NERDTreeMinimalUI = 1
-map <leader>n :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 0
+map <leader>d :NERDTreeToggle<CR>
 autocmd vimrc StdinReadPre * let s:std_in=1
 " If no file or directory arguments are specified, open NERDtree.
 " If a directory is specified as the only argument, open it in NERDTree.
@@ -225,44 +233,45 @@ autocmd vimrc VimEnter *
   \ end
 
 " Signify
-let g:signify_vcs_list = ['git', 'hg', 'svn']
+"let g:signify_vcs_list = ['git', 'hg', 'svn']
 
 " CtrlP.vim
-map <leader>p <C-P>
-map <leader>r :CtrlPMRUFiles<CR>
+"map <leader>p <C-P>
+"map <leader>r :CtrlPMRUFiles<CR>
 "let g:ctrlp_match_window_bottom = 0 " Show at top of window
 
 " Indent Guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+"let g:indent_guides_start_level = 2
+"let g:indent_guides_guide_size = 1
 
 " Mustache/handlebars
-let g:mustache_abbreviations = 1
+"let g:mustache_abbreviations = 1
 
 " https://github.com/junegunn/vim-plug
 " Reload .vimrc and :PlugInstall to install plugins.
 call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-vinegar'
+"Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-eunuch'
+"Plug 'tpope/vim-eunuch'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'fatih/vim-go', {'for': 'go'}
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'mhinz/vim-signify'
-Plug 'mattn/emmet-vim'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'chase/vim-ansible-yaml'
-Plug 'wavded/vim-stylus'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'editorconfig/editorconfig-vim'
+"Plug 'fatih/vim-go', {'for': 'go'}
+"Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+"Plug 'mhinz/vim-signify'
+"Plug 'mattn/emmet-vim'
+"Plug 'mustache/vim-mustache-handlebars'
+"Plug 'chase/vim-ansible-yaml'
+"Plug 'wavded/vim-stylus'
 Plug 'klen/python-mode', {'for': 'python'}
-Plug 'terryma/vim-multiple-cursors'
-Plug 'wting/rust.vim', {'for': 'rust'}
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'wting/rust.vim', {'for': 'rust'}
+Plug 'pangloss/vim-javascript'
 call plug#end()
